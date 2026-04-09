@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: var(--font-poppins);
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
