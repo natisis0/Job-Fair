@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: jobfair_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: the-job-fair-company
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d the-job-fair-company"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  admin:
+    build: ./the-job-fair-company-admin
+    container_name: admin_app
+    restart: always
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./the-job-fair-company-admin/.env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  user:
+    build: ./the-job-fair-company
+    container_name: user_app
+    restart: always
+    ports:
+      - "3001:3000"
+    env_file:
+      - ./the-job-fair-company/.env.production
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
