@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { updateEvent } from "@/features/events/actions/updateEvent";
 import { deleteEvent } from "@/features/events/actions/deleteEvent";
+import EmptyState from "@/components/EmptyState";
 
 function formatDate(value) {
   if (!value) return "-";
@@ -32,9 +33,15 @@ export default function EventTable({ events }) {
 
   if (!events || events.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">
-        No events yet. Create your first event to get started.
-      </div>
+      <EmptyState 
+        title="No events found" 
+        description="You haven't created any events yet. Organize your first job fair or workshop to see it here."
+        icon={
+          <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+          </svg>
+        }
+      />
     );
   }
 

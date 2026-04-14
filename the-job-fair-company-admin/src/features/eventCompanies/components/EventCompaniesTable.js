@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { addCompanyToEvent } from "@/features/eventCompanies/actions/addCompanyToEvent";
 import { removeCompanyFromEvent } from "@/features/eventCompanies/actions/removeCompanyFromEvent";
+import EmptyState from "@/components/EmptyState";
 
 export default function EventCompaniesTable({
   eventId,
@@ -132,11 +133,18 @@ export default function EventCompaniesTable({
           <tbody className="divide-y divide-slate-100/50 bg-transparent">
             {assigned.length === 0 ? (
               <tr>
-                <td
-                  colSpan={5}
-                  className="px-6 py-12 text-center text-sm font-medium text-slate-500"
-                >
-                  No companies assigned to this event yet.
+                <td colSpan={5} className="p-0">
+                  <div className="border-t border-slate-100 bg-white/50 py-12">
+                    <EmptyState 
+                      title="No companies assigned" 
+                      description="No companies have been assigned to this specific event yet. Select a company above to add it."
+                      icon={
+                        <svg className="h-8 w-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V8.11m12.442-2.418l.33-1.066a.75.75 0 011.015-.45l1.97.88a.75.75 0 01.421.827l-.39 1.769m-5.348-1.95a3.5 3.5 0 11-4.173 4.41l-.014.045m1.332-5.467l.7 2.228m3.326-2.228l-.138 1.268M5.132 15.703l.44-1.202m-.754 3.736l.5-1.026" />
+                        </svg>
+                      }
+                    />
+                  </div>
                 </td>
               </tr>
             ) : (

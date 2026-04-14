@@ -16,20 +16,7 @@ export default function Navbar() {
             >
               Why to use Job Fair
             </Link>
-            <Link
-              href="#contacts"
-              className="text-[14px] font-[500] text-[#333] hover:text-[#38C6CD] transition-colors"
-            >
-              Contacts
-            </Link>
           </nav>
-
-          <Link
-            href="/login"
-            className="bg-[#38C6CD] hover:bg-[#2FB4BA] text-white px-8 py-[10px] rounded-full text-[15px] font-[500] transition-colors shadow-sm cursor-pointer"
-          >
-            Login
-          </Link>
         </div>
   )
 }

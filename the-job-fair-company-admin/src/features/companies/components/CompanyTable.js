@@ -5,6 +5,7 @@ import { updateCompanyStatus } from "@/features/companies/actions/updateCompanyS
 import { deleteCompany } from "@/features/companies/actions/deleteCompany";
 import CompanyModal from "./CompanyModal";
 import toast from "react-hot-toast";
+import EmptyState from "@/components/EmptyState";
 
 export default function CompanyTable({ companies }) {
   const [editingCompany, setEditingCompany] = useState(null);
@@ -57,9 +58,15 @@ export default function CompanyTable({ companies }) {
 
   if (!companies || companies.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-slate-200 bg-white p-8 text-center text-sm text-slate-500">
-        No companies yet. Add a company to get started.
-      </div>
+      <EmptyState 
+        title="No companies registered" 
+        description="Your company registry is currently empty. Start by adding a company that will participate in your events."
+        icon={
+          <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h18v18H3V3z" />
+          </svg>
+        }
+      />
     );
   }
 
